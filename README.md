@@ -31,3 +31,5 @@
          Global scope সব জায়গা থেকে access করা যায়।
          Function scope শুধু function এর ভিতরে।
          Block scope (let/const) শুধু {} এর ভিতরে কাজ করে।
+
+   

@@ -11,6 +11,12 @@ const closeModalBtn = document.getElementById("close-modal");
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 updateCartCount();
 
+// ================= SAFE INIT =================
+if (categoryContainer && productContainer) {
+  loadCategories();
+  loadProducts();
+}
+
 // ================= LOAD CATEGORIES =================
 async function loadCategories() {
   const res = await fetch("https://fakestoreapi.com/products/categories");
@@ -66,59 +72,69 @@ async function loadCategoryProducts(category) {
 
 // ================= SHOW PRODUCTS =================
 function showProducts(products) {
+  if (!productContainer) return;
+
   productContainer.innerHTML = "";
 
   products.forEach(product => {
-    const card = document.createElement("div");
-    card.className = "bg-white rounded-xl shadow border p-4 flex flex-col";
-
-    card.innerHTML = `
-      <img src="${product.image}"
-      class="h-52 object-contain mb-4 bg-gray-100 rounded"/>
-
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-[11px] bg-indigo-100 text-indigo-600 px-2 py-1 rounded capitalize">
-          ${product.category}
-        </span>
-
-        <div class="text-sm text-gray-600">
-          ⭐ ${product.rating.rate} (${product.rating.count})
-        </div>
-      </div>
-
-      <h3 class="font-semibold text-sm mb-1 line-clamp-2">
-        ${product.title}
-      </h3>
-
-      <p class="font-bold mb-3">$${product.price}</p>
-
-      <div class="flex gap-2 mt-auto">
-        <button class="details-btn border px-3 py-2 rounded w-full text-sm">
-          Details
-        </button>
-
-        <button class="add-btn bg-indigo-600 text-white px-3 py-2 rounded w-full text-sm">
-          Add
-        </button>
-      </div>
-    `;
-
-    // add btn
-    card.querySelector(".add-btn").addEventListener("click", () => {
-      addToCart(product);
-    });
-
-    // modal
-    card.querySelector(".details-btn").addEventListener("click", () => {
-      openModal(product);
-    });
-
+    const card = createCard(product);
     productContainer.appendChild(card);
   });
 }
 
+// ================= CREATE CARD (GLOBAL) =================
+function createCard(product) {
+  const card = document.createElement("div");
+  card.className = "bg-white rounded-xl shadow border p-4 flex flex-col";
+
+  card.innerHTML = `
+    <img src="${product.image}"
+    class="h-52 object-contain mb-4 bg-gray-100 rounded"/>
+
+    <div class="flex justify-between items-center mb-2">
+      <span class="text-[11px] bg-indigo-100 text-indigo-600 px-2 py-1 rounded capitalize">
+        ${product.category}
+      </span>
+
+      <div class="text-sm text-gray-600">
+        ⭐ ${product.rating.rate} (${product.rating.count})
+      </div>
+    </div>
+
+    <h3 class="font-semibold text-sm mb-1 line-clamp-2">
+      ${product.title}
+    </h3>
+
+    <p class="font-bold mb-3">$${product.price}</p>
+
+    <div class="flex gap-2 mt-auto">
+      <button class="details-btn border px-3 py-2 rounded w-full text-sm">
+        Details
+      </button>
+
+      <button class="add-btn bg-indigo-600 text-white px-3 py-2 rounded w-full text-sm">
+        Add
+      </button>
+    </div>
+  `;
+
+  // add
+  card.querySelector(".add-btn").addEventListener("click", () => {
+    addToCart(product);
+  });
+
+  // details
+  card.querySelector(".details-btn").addEventListener("click", () => {
+    openModal(product);
+  });
+
+  return card;
+}
+
 // ================= MODAL =================
 function openModal(product) {
+  if (!modal) return;
+
   modal.classList.remove("hidden");
   modal.classList.add("flex");
 
@@ -137,13 +153,15 @@ function openModal(product) {
     </div>
   `;
 
-  // 🔥 modal add button fix
   document.getElementById("modal-add").addEventListener("click", () => {
     addToCart(product);
   });
 }
 
-closeModalBtn.addEventListener("click", () => modal.classList.add("hidden"));
+if (closeModalBtn) {
+  closeModalBtn.addEventListener("click", () => modal.classList.add("hidden"));
+}
+
 window.addEventListener("click", e => {
   if (e.target === modal) modal.classList.add("hidden");
 });
@@ -153,7 +171,7 @@ function addToCart(product) {
   const exist = cart.find(item => item.id === product.id);
 
   if (exist) {
-    showToast("Already added to cart", "error");
+    showToast("Already added", "error");
     return;
   }
 
@@ -161,11 +179,11 @@ function addToCart(product) {
   localStorage.setItem("cart", JSON.stringify(cart));
 
   updateCartCount();
-  showToast(`${product.title} added to cart`, "success");
+  showToast("Added to cart", "success");
 }
 
 function updateCartCount() {
-  cartCountEl.innerText = cart.length;
+  if (cartCountEl) cartCountEl.innerText = cart.length;
 }
 
 // ================= TOAST =================
@@ -187,11 +205,5 @@ function showToast(message, type) {
 
   document.body.appendChild(toast);
 
-  setTimeout(() => {
-    toast.remove();
-  }, 2200);
+  setTimeout(() => toast.remove(), 2200);
 }
-
-// ================= INIT =================
-loadCategories();
-loadProducts();

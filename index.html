@@ -265,69 +265,37 @@
   </div>
 </footer>
 
-<!-- Script -->
-    <script src="scripts/scripts.js"></script>
 
 
-    <script>
+
+<div id="product-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-2xl max-w-2xl w-full p-6 relative overflow-y-auto max-h-[90vh]">
+    <button id="close-modal" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-black">&times;</button>
+    <div id="modal-content" class="grid md:grid-cols-2 gap-6 pt-4">
+      </div>
+  </div>
+</div>
+
+<script src="scripts/scripts.js"></script>
+
+<script>
 const trendingContainer = document.getElementById("trending-container");
 
 async function loadTrendingProducts() {
-  try {
-    const res = await fetch("https://fakestoreapi.com/products");
-    const data = await res.json();
+  const res = await fetch("https://fakestoreapi.com/products");
+  const data = await res.json();
 
-    // first 3 only
-    const products = data.slice(0, 3);
+  const products = data.slice(0,3);
 
-    trendingContainer.innerHTML = "";
+  trendingContainer.innerHTML = "";
 
-    products.forEach(p => {
-      const card = document.createElement("div");
-
-      card.className =
-        "bg-white rounded-xl shadow border p-4 flex flex-col";
-
-      card.innerHTML = `
-        <img src="${p.image}"
-        class="h-56 object-contain mb-4 bg-gray-100 rounded"/>
-
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-1 rounded capitalize">
-            ${p.category}
-          </span>
-
-          <div class="text-sm text-gray-600">
-            ⭐ ${p.rating.rate} (${p.rating.count})
-          </div>
-        </div>
-
-        <h3 class="font-semibold text-sm mb-1 line-clamp-2">
-          ${p.title}
-        </h3>
-
-        <p class="font-bold mb-3">$${p.price}</p>
-
-        <div class="flex gap-2 mt-auto">
-          <button class="border px-3 py-2 rounded w-full text-sm">
-            Details
-          </button>
-
-          <button class="bg-indigo-600 text-white px-3 py-2 rounded w-full text-sm">
-            Add
-          </button>
-        </div>
-      `;
-
-      trendingContainer.appendChild(card);
-    });
-
-  } catch (err) {
-    console.log("Trending error:", err);
-  }
+  products.forEach(p=>{
+    // createCard function scripts.js থেকে আসবে
+    trendingContainer.appendChild(createCard(p));
+  });
 }
 
-loadTrendingProducts();
+window.addEventListener("DOMContentLoaded", loadTrendingProducts);
 </script>
 
 

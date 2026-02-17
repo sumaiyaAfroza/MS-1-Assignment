@@ -126,14 +126,21 @@
 </section>
 
 <!-- ================= TRENDING ================= -->
+<!-- ================= TRENDING ================= -->
 <section class="py-16 bg-gray-50">
   <div class="max-w-7xl mx-auto px-6">
 
     <h2 class="text-3xl font-bold mb-10">Trending Now</h2>
 
-   
+    <!-- 🔥 cards will come here -->
+    <div id="trending-container" class="grid md:grid-cols-3 gap-8"></div>
+
   </div>
 </section>
+
+
+
+
 
 
 <!-- ================= FOOTER ================= -->
@@ -260,6 +267,68 @@
 
 <!-- Script -->
     <script src="scripts/scripts.js"></script>
+
+
+    <script>
+const trendingContainer = document.getElementById("trending-container");
+
+async function loadTrendingProducts() {
+  try {
+    const res = await fetch("https://fakestoreapi.com/products");
+    const data = await res.json();
+
+    // first 3 only
+    const products = data.slice(0, 3);
+
+    trendingContainer.innerHTML = "";
+
+    products.forEach(p => {
+      const card = document.createElement("div");
+
+      card.className =
+        "bg-white rounded-xl shadow border p-4 flex flex-col";
+
+      card.innerHTML = `
+        <img src="${p.image}"
+        class="h-56 object-contain mb-4 bg-gray-100 rounded"/>
+
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-1 rounded capitalize">
+            ${p.category}
+          </span>
+
+          <div class="text-sm text-gray-600">
+            ⭐ ${p.rating.rate} (${p.rating.count})
+          </div>
+        </div>
+
+        <h3 class="font-semibold text-sm mb-1 line-clamp-2">
+          ${p.title}
+        </h3>
+
+        <p class="font-bold mb-3">$${p.price}</p>
+
+        <div class="flex gap-2 mt-auto">
+          <button class="border px-3 py-2 rounded w-full text-sm">
+            Details
+          </button>
+
+          <button class="bg-indigo-600 text-white px-3 py-2 rounded w-full text-sm">
+            Add
+          </button>
+        </div>
+      `;
+
+      trendingContainer.appendChild(card);
+    });
+
+  } catch (err) {
+    console.log("Trending error:", err);
+  }
+}
+
+loadTrendingProducts();
+</script>
 
 
 </body>

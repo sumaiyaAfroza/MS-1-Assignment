@@ -36,7 +36,7 @@
 
 <!-- ================= HERO ================= -->
 <section class="relative h-[450px]">
-  <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?q=80&w=1600"
+  <img src="./assets/banner.png"
        class="absolute w-full h-full object-cover" />
 
   <div class="absolute inset-0 bg-black/50"></div>
@@ -104,84 +104,118 @@
 </section>
 
 <!-- ================= TRENDING ================= -->
-<section class="py-16">
+<section class="py-16 bg-gray-50">
   <div class="max-w-7xl mx-auto px-6">
 
-    <h2 class="text-3xl font-bold mb-8">Trending Now</h2>
+    <h2 class="text-3xl font-bold mb-10">Trending Now</h2>
 
     <div class="grid md:grid-cols-3 gap-8">
 
-      <!-- card -->
-      <div class="bg-white rounded-xl shadow p-4">
+      <!-- CARD -->
+      <div class="bg-white rounded-xl shadow-sm border p-4">
+
+        <!-- image -->
         <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500"
-             class="rounded-lg mb-4 w-full h-60 object-cover" />
+          class="rounded-lg mb-4 w-full h-64 object-contain bg-gray-100"/>
 
-        <span class="text-xs bg-indigo-100 text-indigo-600 px-3 py-1 rounded">
-          Men's Clothing
-        </span>
+        <!-- category + rating -->
+        <div class="flex items-center justify-between mb-2">
 
-        <h3 class="font-semibold mt-3 mb-2">
-          Fjallraven Backpack
+          <span class="text-[11px] bg-indigo-100 text-indigo-600 px-3 py-1 rounded">
+            Men's Clothing
+          </span>
+
+          <div class="flex items-center gap-1 text-sm text-gray-600">
+            ⭐ <span class="font-medium">3.9</span>
+            <span class="text-gray-400">(120)</span>
+          </div>
+
+        </div>
+
+        <!-- title -->
+        <h3 class="font-semibold text-[15px] leading-5 mb-1 line-clamp-2">
+          Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops
         </h3>
 
-        <p class="font-bold mb-4">$109.95</p>
+        <!-- price -->
+        <p class="font-bold text-lg mb-4">$109.95</p>
 
+        <!-- buttons -->
         <div class="flex gap-3">
-          <button class="border px-4 py-2 rounded-lg w-full">
-            Details
+
+          <button class="border text-gray-600 px-4 py-2 rounded-lg w-full text-sm flex items-center justify-center gap-2 hover:bg-gray-50">
+            👁 Details
           </button>
-          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg w-full">
-            Add
+
+          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg w-full text-sm flex items-center justify-center gap-2 hover:bg-indigo-700">
+            🛒 Add
           </button>
+
         </div>
       </div>
 
-      <!-- card -->
-      <div class="bg-white rounded-xl shadow p-4">
+
+      <!-- CARD 2 -->
+      <div class="bg-white rounded-xl shadow-sm border p-4">
         <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500"
-             class="rounded-lg mb-4 w-full h-60 object-cover" />
+          class="rounded-lg mb-4 w-full h-64 object-contain bg-gray-100"/>
 
-        <span class="text-xs bg-indigo-100 text-indigo-600 px-3 py-1 rounded">
-          Men's Clothing
-        </span>
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] bg-indigo-100 text-indigo-600 px-3 py-1 rounded">
+            Men's Clothing
+          </span>
 
-        <h3 class="font-semibold mt-3 mb-2">
-          Slim Fit T-Shirt
+          <div class="flex items-center gap-1 text-sm text-gray-600">
+            ⭐ <span class="font-medium">4.1</span>
+            <span class="text-gray-400">(259)</span>
+          </div>
+        </div>
+
+        <h3 class="font-semibold text-[15px] leading-5 mb-1 line-clamp-2">
+          Mens Casual Premium Slim Fit T-Shirts
         </h3>
 
-        <p class="font-bold mb-4">$22.3</p>
+        <p class="font-bold text-lg mb-4">$22.3</p>
 
         <div class="flex gap-3">
-          <button class="border px-4 py-2 rounded-lg w-full">
-            Details
+          <button class="border px-4 py-2 rounded-lg w-full text-sm flex items-center justify-center gap-2">
+            👁 Details
           </button>
-          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg w-full">
-            Add
+          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg w-full text-sm flex items-center justify-center gap-2">
+            🛒 Add
           </button>
         </div>
       </div>
 
-      <!-- card -->
-      <div class="bg-white rounded-xl shadow p-4">
+
+      <!-- CARD 3 -->
+      <div class="bg-white rounded-xl shadow-sm border p-4">
         <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?w=500"
-             class="rounded-lg mb-4 w-full h-60 object-cover" />
+          class="rounded-lg mb-4 w-full h-64 object-contain bg-gray-100"/>
 
-        <span class="text-xs bg-indigo-100 text-indigo-600 px-3 py-1 rounded">
-          Men's Clothing
-        </span>
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[11px] bg-indigo-100 text-indigo-600 px-3 py-1 rounded">
+            Men's Clothing
+          </span>
 
-        <h3 class="font-semibold mt-3 mb-2">
-          Cotton Jacket
+          <div class="flex items-center gap-1 text-sm text-gray-600">
+            ⭐ <span class="font-medium">4.7</span>
+            <span class="text-gray-400">(500)</span>
+          </div>
+        </div>
+
+        <h3 class="font-semibold text-[15px] leading-5 mb-1 line-clamp-2">
+          Mens Cotton Jacket
         </h3>
 
-        <p class="font-bold mb-4">$55.99</p>
+        <p class="font-bold text-lg mb-4">$55.99</p>
 
         <div class="flex gap-3">
-          <button class="border px-4 py-2 rounded-lg w-full">
-            Details
+          <button class="border px-4 py-2 rounded-lg w-full text-sm flex items-center justify-center gap-2">
+            👁 Details
           </button>
-          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg w-full">
-            Add
+          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg w-full text-sm flex items-center justify-center gap-2">
+            🛒 Add
           </button>
         </div>
       </div>
@@ -190,51 +224,130 @@
   </div>
 </section>
 
+
 <!-- ================= FOOTER ================= -->
-<footer class="bg-gray-900 text-gray-300 py-12">
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+<!-- ===== FOOTER ===== -->
+<footer class="bg-[#0f172a] text-gray-300 pt-14 pb-6">
+  <div class="max-w-7xl mx-auto px-6">
 
-    <div>
-      <h2 class="text-xl font-bold text-white mb-3">SwiftCart</h2>
-      <p class="text-sm">
-        Your one-stop shop for fashion and lifestyle needs.
-      </p>
-    </div>
+    <!-- grid -->
+    <div class="grid md:grid-cols-4 gap-10">
 
-    <div>
-      <h3 class="text-white font-semibold mb-3">Quick Links</h3>
-      <ul class="space-y-2 text-sm">
-        <li>Home</li>
-        <li>Products</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-    </div>
+      <!-- brand -->
+      <div>
+        <h2 class="text-xl font-bold text-indigo-400 mb-3">SwiftCart</h2>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          Your one-stop shop for all your fashion and lifestyle needs.
+          Quality products, fast delivery, and excellent support.
+        </p>
+      </div>
 
-    <div>
-      <h3 class="text-white font-semibold mb-3">Support</h3>
-      <ul class="space-y-2 text-sm">
-        <li>FAQ</li>
-        <li>Shipping</li>
-        <li>Returns</li>
-      </ul>
-    </div>
+      <!-- links -->
+      <div>
+        <h3 class="text-sm font-semibold text-white mb-4 tracking-wide">
+          QUICK LINKS
+        </h3>
+        <ul class="space-y-2 text-sm">
+          <li class="hover:text-white cursor-pointer">Home</li>
+          <li class="hover:text-white cursor-pointer">Products</li>
+          <li class="hover:text-white cursor-pointer">About</li>
+          <li class="hover:text-white cursor-pointer">Contact</li>
+        </ul>
+      </div>
 
-    <div>
-      <h3 class="text-white font-semibold mb-3">Newsletter</h3>
-      <div class="flex">
-        <input class="px-3 py-2 w-full rounded-l bg-gray-800 border-none outline-none"
-               placeholder="Enter email">
-        <button class="bg-indigo-600 px-4 rounded-r">Subscribe</button>
+      <!-- support -->
+      <div>
+        <h3 class="text-sm font-semibold text-white mb-4 tracking-wide">
+          SUPPORT
+        </h3>
+        <ul class="space-y-2 text-sm">
+          <li class="hover:text-white cursor-pointer">FAQ</li>
+          <li class="hover:text-white cursor-pointer">Shipping</li>
+          <li class="hover:text-white cursor-pointer">Returns</li>
+          <li class="hover:text-white cursor-pointer">Privacy Policy</li>
+        </ul>
+      </div>
+
+      <!-- newsletter -->
+      <div>
+        <h3 class="text-sm font-semibold text-white mb-4 tracking-wide">
+          SUBSCRIBE TO OUR NEWSLETTER
+        </h3>
+
+        <p class="text-sm text-gray-400 mb-4">
+          The latest news, articles, and resources,
+          sent to your inbox weekly.
+        </p>
+
+        <div class="flex">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="w-full px-4 py-2 rounded-l-md bg-slate-800 border border-slate-700 focus:outline-none text-sm"
+          />
+          <button class="bg-indigo-600 px-4 rounded-r-md text-sm font-medium hover:bg-indigo-700">
+            Subscribe
+          </button>
+        </div>
       </div>
     </div>
 
-  </div>
+    <!-- divider -->
+    <div class="border-t border-slate-700 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
 
-  <div class="text-center text-sm text-gray-500 mt-10">
-    © 2025 SwiftCart. All rights reserved.
+      <p class="text-sm text-gray-500">
+        © 2025 SwiftCart, Inc. All rights reserved.
+      </p>
+
+      <!-- icons -->
+      <div class="flex gap-5 text-gray-400">
+
+        <!-- facebook -->
+        <a href="#" class="hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+
+        <!-- twitter -->
+        <a href="#" class="hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 16.5 3
+            c-2.63 0-4.5 2.4-3.9 4.9A12.94 12.94 0 0 1 3 4
+            s-4 9 5 13a13.3 13.3 0 0 1-8 2c9 5 20 0 20-11.5
+            a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+          </svg>
+        </a>
+
+        <!-- instagram -->
+        <a href="#" class="hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="3"/>
+            <circle cx="17.5" cy="6.5" r="1"/>
+          </svg>
+        </a>
+
+        <!-- linkedin -->
+        <a href="#" class="hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2
+            2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+
+      </div>
+    </div>
   </div>
 </footer>
+
 
 </body>
 </html>

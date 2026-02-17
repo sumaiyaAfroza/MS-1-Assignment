@@ -31,7 +31,7 @@ function createCategoryBtn(category) {
 
   btn.innerText = category;
   btn.className =
-    "px-4 py-2 rounded-full border text-sm font-medium transition hover:bg-indigo-600 hover:text-white";
+    "px-4 py-2 rounded-full border text-sm font-medium hover:bg-indigo-600 hover:text-white";
 
   btn.addEventListener("click", () => {
     setActive(btn);
@@ -70,8 +70,7 @@ function showProducts(products) {
 
   products.forEach(product => {
     const card = document.createElement("div");
-    card.className =
-      "bg-white rounded-xl shadow-sm border p-4 flex flex-col";
+    card.className = "bg-white rounded-xl shadow border p-4 flex flex-col";
 
     card.innerHTML = `
       <img src="${product.image}"
@@ -95,21 +94,21 @@ function showProducts(products) {
 
       <div class="flex gap-2 mt-auto">
         <button class="details-btn border px-3 py-2 rounded w-full text-sm">
-          <i class="fa-regular fa-eye"></i> Details
+          Details
         </button>
 
         <button class="add-btn bg-indigo-600 text-white px-3 py-2 rounded w-full text-sm">
-          <i class="fa-solid fa-cart-shopping"></i> Add
+          Add
         </button>
       </div>
     `;
 
-    // add cart
+    // add btn
     card.querySelector(".add-btn").addEventListener("click", () => {
       addToCart(product);
     });
 
-    // details modal
+    // modal
     card.querySelector(".details-btn").addEventListener("click", () => {
       openModal(product);
     });
@@ -128,35 +127,41 @@ function openModal(product) {
 
     <div>
       <h2 class="text-xl font-bold mb-2">${product.title}</h2>
-
       <p class="text-gray-600 mb-3">${product.description}</p>
+      <p class="font-bold mb-3">$${product.price}</p>
 
-      <p class="font-bold text-lg mb-2">$${product.price}</p>
-
-      <p class="text-sm mb-4">⭐ ${product.rating.rate} (${product.rating.count})</p>
-
-      <button onclick='addToCart(${JSON.stringify(product)})'
+      <button id="modal-add"
         class="bg-indigo-600 text-white px-5 py-2 rounded">
         Add to Cart
       </button>
     </div>
   `;
+
+  // 🔥 modal add button fix
+  document.getElementById("modal-add").addEventListener("click", () => {
+    addToCart(product);
+  });
 }
 
-closeModalBtn.addEventListener("click", () => {
-  modal.classList.add("hidden");
-});
-
+closeModalBtn.addEventListener("click", () => modal.classList.add("hidden"));
 window.addEventListener("click", e => {
   if (e.target === modal) modal.classList.add("hidden");
 });
 
-// ================= CART =================
+// ================= ADD TO CART =================
 function addToCart(product) {
+  const exist = cart.find(item => item.id === product.id);
+
+  if (exist) {
+    showToast("Already added to cart", "error");
+    return;
+  }
+
   cart.push(product);
   localStorage.setItem("cart", JSON.stringify(cart));
+
   updateCartCount();
-  showToast(`${product.title} added to cart`);
+  showToast(`${product.title} added to cart`, "success");
 }
 
 function updateCartCount() {
@@ -164,15 +169,27 @@ function updateCartCount() {
 }
 
 // ================= TOAST =================
-function showToast(msg) {
+function showToast(message, type) {
   const toast = document.createElement("div");
-  toast.className =
-    "fixed top-5 right-5 bg-black text-white px-5 py-3 rounded-lg z-50";
-  toast.innerText = msg;
+
+  let bg = "bg-indigo-600";
+  if (type === "error") bg = "bg-red-500";
+
+  toast.className = `
+    fixed bottom-10 right-6
+    ${bg}
+    text-white px-5 py-3 rounded-lg shadow-lg
+    animate-slide
+    z-50
+  `;
+
+  toast.innerText = message;
 
   document.body.appendChild(toast);
 
-  setTimeout(() => toast.remove(), 2000);
+  setTimeout(() => {
+    toast.remove();
+  }, 2200);
 }
 
 // ================= INIT =================

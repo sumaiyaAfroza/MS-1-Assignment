@@ -1,11 +1,323 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product</title>
+    <!-- Tailwind CDN Connect -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font-Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <a
+              href="#"
+              class="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition-colors"
+            >
+              SwiftCart
+            </a>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex space-x-8">
+            <a
+              href="index.html"
+              class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
+            >
+              Home
+            </a>
+            <a
+              href="product.html"
+              class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
+            >
+              Products
+            </a>
+            <a
+              href="#"
+              class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
+            >
+              About
+            </a>
+            <a
+              href="#"
+              class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors"
+            >
+              Contact
+            </a>
+          </div>
+
+          <!-- Shopping Cart  -->
+          <div class="flex items-center">
+            <a
+              href="#"
+              class="text-gray-700 hover:text-indigo-600 transition-colors relative"
+            >
+              <i class="fa-solid fa-cart-shopping text-xl"></i>
+              <!-- Cart Badge -->
+              <span
+                id="cart-count"
+                class="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold"
+              >
+                0
+              </span>
+            </a>
+
+            <!-- Mobile Menu -->
+            <button
+              id="mobile-menu-button"
+              class="md:hidden ml-4 text-gray-700 hover:text-indigo-600 focus:outline-none"
+            >
+              <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a
+            href="#"
+            class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
+          >
+            Home
+          </a>
+          <a
+            href="#"
+            class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
+          >
+            Products
+          </a>
+          <a
+            href="#"
+            class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
+          >
+            About
+          </a>
+          <a
+            href="#"
+            class="text-gray-700 hover:text-indigo-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors"
+          >
+            Contact
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden">
+      <div class="fixed inset-0 bg-black/50" onclick="toggleCart()"></div>
+      <div
+        class="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl p-6 overflow-y-auto"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold">Your Cart</h2>
+          <button
+            onclick="toggleCart()"
+            class="text-gray-500 hover:text-black text-2xl"
+          >
+            &times;
+          </button>
+        </div>
+        <div id="cart-items" class="space-y-4"></div>
+        <div class="border-t border-t-gray-300 mt-6 pt-6">
+          <div class="flex justify-between text-xl font-bold mb-6">
+            <span>Total:</span>
+            <span id="cart-total">$0.00</span>
+          </div>
+          <button
+            class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700"
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Toast Message -->
+    <div id="toast-container" class="fixed top-10 right-5 z-[100] flex flex-col gap-3"></div>
+    <!-- Our All Product -->
+    <section class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-[#111827]">
+            Our Products
+          </h2>
+        </div>
+
+        <div
+          id="category-container"
+          class="flex flex-wrap justify-center gap-3 md:gap-4 mb-12"
+        >
+          <!-- Category -->
+        </div>
+
+        <div
+          id="product-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        >
+          <!-- All Product -->
+        </div>
+        <!-- Modal -->
+        <div
+          id="product-modal"
+          class="fixed inset-0 z-50 hidden overflow-y-auto"
+        >
+          <div
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+            onclick="closeModal()"
+          ></div>
+
+          <div class="flex items-center justify-center min-h-screen p-4">
+            <div
+              class="relative bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform transition-all"
+            >
+              <button
+                onclick="closeModal()"
+                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10"
+              >
+                <i class="fa-solid fa-circle-xmark text-2xl"></i>
+              </button>
+
+              <div id="modal-content" class="p-6 md:p-8"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1e293b] text-gray-400 py-16 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12"
+        >
+          <div class="space-y-4">
+            <h2 class="text-2xl font-bold text-indigo-500">SwiftCart</h2>
+            <p class="text-sm leading-relaxed">
+              Your one-stop shop for all your fashion and lifestyle needs.
+              Quality products, fast delivery, and excellent support.
+            </p>
+          </div>
+
+          <div>
+            <h3
+              class="text-gray-300 font-semibold uppercase tracking-wider mb-6 text-md"
+            >
+              Quick Links
+            </h3>
+            <ul class="space-y-4 text-md font-semibold">
+              <li>
+                <a href="#" class="hover:text-white transition-colors">Home</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Products</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors">About</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3
+              class="text-gray-300 font-semibold uppercase tracking-wider mb-6 text-md"
+            >
+              Support
+            </h3>
+            <ul class="space-y-4 text-md font-semibold">
+              <li>
+                <a href="#" class="hover:text-white transition-colors">FAQ</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Shipping</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Returns</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3
+              class="text-gray-300 font-semibold uppercase tracking-wider mb-6 text-md"
+            >
+              Subscribe to our newsletter
+            </h3>
+            <p class="text-md mb-6">
+              The latest news, articles, and resources, sent to your inbox
+              weekly.
+            </p>
+            <form class="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="w-full px-4 py-2.5 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <button
+                type="submit"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-6 rounded-lg transition-colors"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <p class="text-sm">© 2025 SwiftCart, Inc. All rights reserved.</p>
+
+          <div class="flex space-x-6 text-xl">
+            <a href="#" class="hover:text-white transition-colors"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="#" class="hover:text-white transition-colors"
+              ><i class="fa-brands fa-twitter"></i
+            ></a>
+            <a href="#" class="hover:text-white transition-colors"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="#" class="hover:text-white transition-colors"
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
+            <a href="#" class="hover:text-white transition-colors"
+              ><i class="fa-regular fa-envelope"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="app.js"></script>
+  </body>
 </html>
